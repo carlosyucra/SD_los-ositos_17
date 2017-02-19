@@ -38,6 +38,8 @@ public class Menu extends JFrame{
 		creador();
 		setVisible(true);
 		setDefaultCloseOperation(EXIT_ON_CLOSE);
+                
+                new Ventana();
 		
 	}
 	public void cambiarTexto(String t){
