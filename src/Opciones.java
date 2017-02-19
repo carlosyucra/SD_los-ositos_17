@@ -167,7 +167,7 @@ public class Opciones extends JPanel implements Runnable{
 					}else if(tiempo == 0){
 						sonido.close();
 						perder.close();
-						juego.menu.cambiarTexto("Fuera de tiempo");
+						//juego.menu.cambiarTexto("Fuera de tiempo");
 						juego.cerrarTodo();
 					}if(ultimoSegundo==true && tiempo == 10){
 						caraEnojado();

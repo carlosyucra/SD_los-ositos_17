@@ -126,7 +126,7 @@ public class Enemy implements Runnable{
 			juego.derecha.perder.loop(1);
 			juego.derecha.sonido.close();
 			juego.derecha.perder.close();
-			juego.menu.cambiarTexto("Perdio");;
+			//juego.menu.cambiarTexto("Perdio");;
 			juego.cerrarTodo();
 		}
 	}
