@@ -86,7 +86,7 @@ public class Menu extends JFrame{
 		add(salirP);
 	}
 	public void creador(){
-		creador=new JLabel("Creado por Carlos Yucra");
+		creador=new JLabel("Grupo \"los ositos\"");
 		creadorF = new Font("Arial",Font.BOLD,15);
 		creadorP=new JPanel();
 		creadorP.setFont(creadorF);
