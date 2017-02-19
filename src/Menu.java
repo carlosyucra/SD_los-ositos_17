@@ -28,7 +28,7 @@ public class Menu extends JFrame{
 	Dimension screenSize = Toolkit.getDefaultToolkit().getScreenSize();
         //COMENTARIO
 	public Menu(){
-		setTitle("Juego grupo 'los ositos' ");
+		setTitle("Juego grupo 'los ositos'");
 		setSize(600,350);
 		setResizable(false);
 		setLocation(screenSize.width/2-600/2,screenSize.height/2-350/2);
