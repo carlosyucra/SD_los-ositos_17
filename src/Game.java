@@ -4,7 +4,7 @@ import java.awt.Toolkit;
 import java.util.ArrayList;
 import javax.swing.JPanel;
 import javax.swing.JFrame;
-//hola osito!
+
 public class Game extends JPanel{
 	public JFrame ventana;
 	public Menu menu;
@@ -17,11 +17,11 @@ public class Game extends JPanel{
 	private int L=25;
 	public String nivel="nivel1";
 	
-	public Game(JFrame ventana,Menu menu){
+	public Game(JFrame ventana,Menu menu, String personajeNombre){
 		this.ventana=ventana;
 		this.menu=menu;
 		izquierda = new Laberinto(this,L);
-		jugador = new Player(this,izquierda,L);
+		jugador = new Player(this,izquierda,L,personajeNombre);
 		enemigos = new ArrayList<Enemy>();
 		derecha = new Opciones(this,jugador,null);
 		hilos = new ArrayList<Thread>();

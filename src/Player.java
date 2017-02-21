@@ -26,19 +26,22 @@ public class Player {
 	public boolean movi=true; //si el objeto si se mueve es false sino es true 
 	public PuntoD dirige;		//Hasta donde se dirige es para que lo sepa el enemigo
 	private ImageIcon img;
-	public Player(Game juego,Laberinto lab,int L){
-		
+        private String personajeNombre;
+        
+	public Player(Game juego,Laberinto lab,int L, String personajeNombre){
 		this.juego=juego;
 		this.laberinto=lab;
 		nodos=lab.nodos;
 		this.L=L;
+                this.personajeNombre = personajeNombre;
 		nuevosVertices(lab.vertices);
 		punto=getPunto("a").clone();
 		dirige=this.punto;
-		img = new ImageIcon(getClass().getResource("/Imagenes/jugador.png"));
+		//img = new ImageIcon(getClass().getResource("/Imagenes/jugador.png"));
+		img = new ImageIcon(getClass().getResource("/Imagenes/"+this.personajeNombre));
 		posX=punto.getX()*L-grosor/2;
 		posY=punto.getY()*L-grosor/2;
-
+                
 		//addMovimientos();
 	}
 	public void addMovimientos(){
