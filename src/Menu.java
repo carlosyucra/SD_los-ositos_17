@@ -2,6 +2,9 @@
 import java.awt.Color;
 import java.awt.Dimension;
 import java.awt.Toolkit;
+import java.io.InputStream;
+import javax.sound.sampled.AudioSystem;
+import javax.sound.sampled.Clip;
 import javax.swing.JFrame;
 
 /*
@@ -23,6 +26,7 @@ public class Menu extends javax.swing.JFrame {
         initComponents();
         this.getContentPane().setBackground(Color.white);
         this.setLocationRelativeTo(null);
+        audio();
     }
 
     /**
@@ -111,6 +115,31 @@ public class Menu extends javax.swing.JFrame {
      */
     public void visible(boolean f){
 	setVisible(f);
+    }
+    public void audio(){
+         try {
+            
+            // Se obtiene un Clip de sonido
+            //
+            Clip sonido = AudioSystem.getClip();
+            InputStream path=getClass().getResourceAsStream("/Audios/bienvenida.wav");
+            //InputStream path=getClass().getResourceAsStream("/Sonidos/reloj1.wav");
+            // Se carga con un fichero wav
+            sonido.open(AudioSystem.getAudioInputStream(path));
+            
+            // Comienza la reproducción
+            sonido.start();
+            
+            // Espera mientras se esté reproduciendo.
+            /*while (sonido.isOpen())
+                Thread.sleep(1000);
+             System.out.println("fin");
+            // Se cierra el clip.
+            //sonido.close();*/
+        } catch (Exception e) {
+            System.out.println("" + e);
+        }
+        
     }
     public void nuevo() {
         JFrame ventana = new JFrame("No OutPut¡");
