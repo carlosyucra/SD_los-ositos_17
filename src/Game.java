@@ -4,7 +4,7 @@ import java.awt.Toolkit;
 import java.util.ArrayList;
 import javax.swing.JPanel;
 import javax.swing.JFrame;
-
+//hola osito!
 public class Game extends JPanel{
 	public JFrame ventana;
 	public Menu menu;
