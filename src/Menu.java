@@ -2,10 +2,13 @@
 import java.awt.Color;
 import java.awt.Dimension;
 import java.awt.Toolkit;
+import java.io.BufferedInputStream;
 import java.io.InputStream;
+import javax.sound.sampled.AudioInputStream;
 import javax.sound.sampled.AudioSystem;
 import javax.sound.sampled.Clip;
 import javax.swing.JFrame;
+import javax.swing.JOptionPane;
 
 /*
  * To change this license header, choose License Headers in Project Properties.
@@ -19,6 +22,8 @@ import javax.swing.JFrame;
  */
 public class Menu extends javax.swing.JFrame {
     public String personajeNombre;
+    private Thread audio;
+    private Clip sonido;
     /**
      * Creates new form Menu2
      */
@@ -26,7 +31,7 @@ public class Menu extends javax.swing.JFrame {
         initComponents();
         this.getContentPane().setBackground(Color.white);
         this.setLocationRelativeTo(null);
-        audio();
+        hiloaudio();
     }
 
     /**
@@ -44,7 +49,7 @@ public class Menu extends javax.swing.JFrame {
         jLabel2 = new javax.swing.JLabel();
 
         setDefaultCloseOperation(javax.swing.WindowConstants.EXIT_ON_CLOSE);
-        setTitle("¡No hay salida!");
+        setTitle("!Atrapemos¡");
 
         jLabel1.setIcon(new javax.swing.ImageIcon(getClass().getResource("/Imagenes/gif.gif"))); // NOI18N
 
@@ -102,6 +107,8 @@ public class Menu extends javax.swing.JFrame {
     private void jButton2ActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jButton2ActionPerformed
         // TODO add your handling code here:
         visible(false);
+        audio.stop();
+        sonido.close();
         new Personajes(this).setVisible(true);
     }//GEN-LAST:event_jButton2ActionPerformed
 
@@ -116,33 +123,51 @@ public class Menu extends javax.swing.JFrame {
     public void visible(boolean f){
 	setVisible(f);
     }
+    public void hiloaudio(){
+        Runnable r = new Runnable() {
+            @Override
+            public void run() {
+                audio();
+            }
+        };
+        audio = new Thread(r);
+        audio.start();
+    }
     public void audio(){
          try {
             
             // Se obtiene un Clip de sonido
             //
-            Clip sonido = AudioSystem.getClip();
+            sonido = AudioSystem.getClip();
             InputStream path=getClass().getResourceAsStream("/Audios/bienvenida.wav");
+            InputStream bufferedIn = new BufferedInputStream(path);
+            AudioInputStream audioStream = AudioSystem.getAudioInputStream(bufferedIn);
             //InputStream path=getClass().getResourceAsStream("/Sonidos/reloj1.wav");
             // Se carga con un fichero wav
-            sonido.open(AudioSystem.getAudioInputStream(path));
-            
-            // Comienza la reproducción
+            sonido.open(audioStream);
             sonido.start();
             
             // Espera mientras se esté reproduciendo.
-            /*while (sonido.isOpen())
-                Thread.sleep(1000);
-             System.out.println("fin");
+            //while (sonido.isOpen())
+            Thread.sleep(9000);
+            sonido.close();
+            
+            path=getClass().getResourceAsStream("/Audios/enter.wav");
+            bufferedIn = new BufferedInputStream(path);
+            audioStream = AudioSystem.getAudioInputStream(bufferedIn);
+            sonido.open(audioStream);
+            sonido.start();
+             /*System.out.println("fin");
             // Se cierra el clip.
             //sonido.close();*/
         } catch (Exception e) {
+             JOptionPane.showMessageDialog(null, e);
             System.out.println("" + e);
         }
         
     }
     public void nuevo() {
-        JFrame ventana = new JFrame("No OutPut¡");
+        JFrame ventana = new JFrame("!Atrapemos¡");
         Dimension screenSize = Toolkit.getDefaultToolkit().getScreenSize();
         ventana.setVisible(true);
         ventana.setDefaultCloseOperation(JFrame.EXIT_ON_CLOSE);

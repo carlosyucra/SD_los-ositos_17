@@ -15,8 +15,10 @@ import java.awt.Font;
 import java.awt.Image;
 import java.awt.event.MouseEvent;
 import java.awt.event.MouseListener;
+import java.io.BufferedInputStream;
 import java.io.IOException;
 import java.io.InputStream;
+import javax.sound.sampled.AudioInputStream;
 
 public class Opciones extends JPanel implements Runnable{
 	private Game juego;
@@ -49,9 +51,11 @@ public class Opciones extends JPanel implements Runnable{
 	}
 	public void cargarSonido(){
 		try {
-			InputStream path=getClass().getResourceAsStream("/Sonidos/perder.wav");
-			perder=AudioSystem.getClip();
-			perder.open(AudioSystem.getAudioInputStream(path));
+                        perder = AudioSystem.getClip();
+                        InputStream path=getClass().getResourceAsStream("/Sonidos/perder.wav");
+                        InputStream bufferedIn = new BufferedInputStream(path);
+                        AudioInputStream audioStream = AudioSystem.getAudioInputStream(bufferedIn);
+			perder.open(audioStream);
 		} catch (LineUnavailableException | IOException | UnsupportedAudioFileException e) {
 			// TODO Auto-generated catch block
 			System.out.println("Error al cargar sonido error");e.printStackTrace();
@@ -137,17 +141,20 @@ public class Opciones extends JPanel implements Runnable{
 	@Override
 	public void run() {
 		// TODO Auto-generated method stub
-		marcador();
-		imagen();
-		botones();
-		cargarSonido();
-		int repeticionesReloj=1;
-		try{
-			
-				sonido=AudioSystem.getClip();
-				sonido.open(AudioSystem.getAudioInputStream(getClass().getResourceAsStream("/Sonidos/reloj1.wav")));
-		}catch(Exception e){
-			System.out.println("Error en la carga de sonido "+e.getMessage());
+            marcador();
+            imagen();
+            botones();
+            cargarSonido();
+            int repeticionesReloj = 1;
+            try {
+
+                sonido = AudioSystem.getClip();
+                InputStream path = getClass().getResourceAsStream("/Sonidos/reloj1.wav");
+                InputStream bufferedIn = new BufferedInputStream(path);
+                AudioInputStream audioStream = AudioSystem.getAudioInputStream(bufferedIn);
+                sonido.open(audioStream);
+            } catch (Exception e) {
+                System.out.println("Error en la carga de sonido "+e.getMessage());
 		}
 		while (true) {
 			reiniciar = false;
@@ -164,6 +171,7 @@ public class Opciones extends JPanel implements Runnable{
 						juego.izquierda.pintarComida(true, 0, 0);
 						tiempo = tiempoR;
 						ultimoSegundo=true;
+                                                escogerAudio();
 					}else if(tiempo == 0){
 						sonido.close();
 						perder.close();
@@ -184,5 +192,35 @@ public class Opciones extends JPanel implements Runnable{
 			}
 		}
 	}
+    public void escogerAudio(){
+        if(jugador.personajeNombre.equals("personaje1.png")){
+            audio("/Audios/atrapaCofre.wav");
+        }else{
+            audio("/Audios/atrapaCofre.wav");
+        }
+    }
+    public void audio(String dir) {
+        try {
 
+            // Se obtiene un Clip de sonido
+            //
+            Clip sonido = AudioSystem.getClip();
+            InputStream path = getClass().getResourceAsStream(dir);
+            InputStream bufferedIn = new BufferedInputStream(path);
+            AudioInputStream audioStream = AudioSystem.getAudioInputStream(bufferedIn);
+            //InputStream path=getClass().getResourceAsStream("/Sonidos/reloj1.wav");
+            // Se carga con un fichero wav
+            sonido.open(audioStream);
+
+            // Comienza la reproducción
+            sonido.start();
+
+            // Espera mientras se esté reproduciendo.
+            /*System.out.println("fin");
+            // Se cierra el clip.
+            //sonido.close();*/
+        } catch (Exception e) {
+            System.out.println("" + e);
+        }
+    }
 }

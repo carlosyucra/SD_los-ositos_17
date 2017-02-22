@@ -1,3 +1,10 @@
+
+import java.io.BufferedInputStream;
+import java.io.InputStream;
+import javax.sound.sampled.AudioInputStream;
+import javax.sound.sampled.AudioSystem;
+import javax.sound.sampled.Clip;
+
 /*
  * To change this license header, choose License Headers in Project Properties.
  * To change this template file, choose Tools | Templates
@@ -10,12 +17,14 @@
  */
 public class Personajes extends javax.swing.JFrame {
     Menu menu;
+    Clip sonido;
     /**
      * Creates new form Personajes
      */
     public Personajes(Menu menu) {
         initComponents();
         this.menu = menu;
+        audio();
     }
 
     /**
@@ -78,46 +87,44 @@ public class Personajes extends javax.swing.JFrame {
         // TODO add your handling code here:
         menu.personajeNombre = "personaje1.png";
         menu.nuevo();
-        this.dispose();
+        sonido.close();
+        //this.dispose();
     }//GEN-LAST:event_jLabel2MouseClicked
 
     private void jLabel1MouseClicked(java.awt.event.MouseEvent evt) {//GEN-FIRST:event_jLabel1MouseClicked
         // TODO add your handling code here:
         menu.personajeNombre = "personaje2.png";
         menu.nuevo();
-        this.dispose();
+        sonido.close();
+        //this.dispose();
     }//GEN-LAST:event_jLabel1MouseClicked
-
-    /**
-     * @param args the command line arguments
-     */
-    public static void main(String args[]) {
-        /* Set the Nimbus look and feel */
-        //<editor-fold defaultstate="collapsed" desc=" Look and feel setting code (optional) ">
-        /* If Nimbus (introduced in Java SE 6) is not available, stay with the default look and feel.
-         * For details see http://download.oracle.com/javase/tutorial/uiswing/lookandfeel/plaf.html 
-         */
-        try {
-            for (javax.swing.UIManager.LookAndFeelInfo info : javax.swing.UIManager.getInstalledLookAndFeels()) {
-                if ("Nimbus".equals(info.getName())) {
-                    javax.swing.UIManager.setLookAndFeel(info.getClassName());
-                    break;
-                }
-            }
-        } catch (ClassNotFoundException ex) {
-            java.util.logging.Logger.getLogger(Personajes.class.getName()).log(java.util.logging.Level.SEVERE, null, ex);
-        } catch (InstantiationException ex) {
-            java.util.logging.Logger.getLogger(Personajes.class.getName()).log(java.util.logging.Level.SEVERE, null, ex);
-        } catch (IllegalAccessException ex) {
-            java.util.logging.Logger.getLogger(Personajes.class.getName()).log(java.util.logging.Level.SEVERE, null, ex);
-        } catch (javax.swing.UnsupportedLookAndFeelException ex) {
-            java.util.logging.Logger.getLogger(Personajes.class.getName()).log(java.util.logging.Level.SEVERE, null, ex);
+    public void audio(){
+         try {
+            
+            // Se obtiene un Clip de sonido
+            //
+            sonido = AudioSystem.getClip();
+            InputStream path=getClass().getResourceAsStream("/Audios/personaje.wav");
+            InputStream bufferedIn = new BufferedInputStream(path);
+            AudioInputStream audioStream = AudioSystem.getAudioInputStream(bufferedIn);
+            //InputStream path=getClass().getResourceAsStream("/Sonidos/reloj1.wav");
+            // Se carga con un fichero wav
+            sonido.open(audioStream);
+            
+            // Comienza la reproducción
+            sonido.start();
+            
+            // Espera mientras se esté reproduciendo.
+           
+             /*System.out.println("fin");
+            // Se cierra el clip.
+            //sonido.close();*/
+        } catch (Exception e) {
+            System.out.println("" + e);
         }
-        //</editor-fold>
-
-        /* Create and display the form */
         
     }
+
 
     // Variables declaration - do not modify//GEN-BEGIN:variables
     private javax.swing.JLabel jLabel1;

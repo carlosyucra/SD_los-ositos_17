@@ -1,7 +1,12 @@
 import java.awt.BorderLayout;
 import java.awt.Dimension;
 import java.awt.Toolkit;
+import java.io.BufferedInputStream;
+import java.io.InputStream;
 import java.util.ArrayList;
+import javax.sound.sampled.AudioInputStream;
+import javax.sound.sampled.AudioSystem;
+import javax.sound.sampled.Clip;
 import javax.swing.JPanel;
 import javax.swing.JFrame;
 
@@ -58,6 +63,7 @@ public class Game extends JPanel{
 		enemigos.add(new Enemy(this,izquierda,jugador,"m",L));
 
 		hilos.add(new Thread(enemigos.get(0)));
+                audio("/Audios/escapa.wav");
 	}
 	public void nivel2(){
 		nivel="nivel2";
@@ -84,7 +90,7 @@ public class Game extends JPanel{
 		hilos.clear();
 		hilos.add(new Thread(enemigos.get(0)));hilos.get(0).start();
 		hilos.add(new Thread(enemigos.get(1)));hilos.get(1).start();
-		
+                audio("/Audios/nivel2.wav");
 		
 	}
 	public void nivel3(){
@@ -132,6 +138,7 @@ public class Game extends JPanel{
 		hilos.clear();
 		hilos.add(new Thread(enemigos.get(0)));hilos.get(0).start();
 		hilos.add(new Thread(enemigos.get(1)));hilos.get(1).start();
+                audio("/Audios/nivel3.wav");
 	}
 	public void nivel4(){
 		nivel="nivel4";
@@ -170,6 +177,8 @@ public class Game extends JPanel{
 				hilos.add(new Thread(enemigos.get(0)));hilos.get(0).start();
 				hilos.add(new Thread(enemigos.get(1)));hilos.get(1).start();
 				hilos.add(new Thread(enemigos.get(2)));hilos.get(2).start();
+                                
+                audio("/Audios/nivel4.wav");
 	}
 	//Nivel para despues :)
 	public void nivel5(){
@@ -195,5 +204,31 @@ public class Game extends JPanel{
 		
 		
 	}
+        public void audio(String dir){
+         try {
+            
+            // Se obtiene un Clip de sonido
+            //
+            Clip sonido = AudioSystem.getClip();
+            InputStream path=getClass().getResourceAsStream(dir);
+            InputStream bufferedIn = new BufferedInputStream(path);
+            AudioInputStream audioStream = AudioSystem.getAudioInputStream(bufferedIn);
+            //InputStream path=getClass().getResourceAsStream("/Sonidos/reloj1.wav");
+            // Se carga con un fichero wav
+            sonido.open(audioStream);
+            
+            // Comienza la reproducción
+            sonido.start();
+            
+            // Espera mientras se esté reproduciendo.
+           
+             /*System.out.println("fin");
+            // Se cierra el clip.
+            //sonido.close();*/
+        } catch (Exception e) {
+            System.out.println("" + e);
+        }
+        
+    }
 
 }

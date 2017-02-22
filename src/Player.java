@@ -26,7 +26,8 @@ public class Player {
 	public boolean movi=true; //si el objeto si se mueve es false sino es true 
 	public PuntoD dirige;		//Hasta donde se dirige es para que lo sepa el enemigo
 	private ImageIcon img;
-        private String personajeNombre;
+        private ImageIcon comida;
+        public String personajeNombre;
         
 	public Player(Game juego,Laberinto lab,int L, String personajeNombre){
 		this.juego=juego;
@@ -39,11 +40,19 @@ public class Player {
 		dirige=this.punto;
 		//img = new ImageIcon(getClass().getResource("/Imagenes/jugador.png"));
 		img = new ImageIcon(getClass().getResource("/Imagenes/"+this.personajeNombre));
+                setComida(personajeNombre);
 		posX=punto.getX()*L-grosor/2;
 		posY=punto.getY()*L-grosor/2;
                 
 		//addMovimientos();
 	}
+        public void setComida(String personaje){
+            if(personaje.equals("personaje1.wav")){
+                comida = new ImageIcon(getClass().getResource("/Imagenes/cofre.png"));
+            }else{
+                comida = new ImageIcon(getClass().getResource("/Imagenes/cofre.png"));
+            }
+        }
 	public void addMovimientos(){
 		juego.izquierda.setFocusable(true);
 		juego.izquierda.addKeyListener(new KeyListener() {
@@ -148,6 +157,8 @@ public class Player {
 			juego.nextLevel();
 		}
 	}
-
+        public void comida(Graphics2D g){
+            g.drawImage(comida.getImage(),laberinto.comidaX*laberinto.L -20/2-10, laberinto.comidaY*laberinto.L-20/2, 30, 30,null);
+        }
 
 }

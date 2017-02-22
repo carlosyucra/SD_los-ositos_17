@@ -14,7 +14,7 @@ public class Laberinto extends JPanel {
 	public ArrayList<PuntoD> vertices=new ArrayList<PuntoD>();
 	public ArrayList<NodoD> nodos=new ArrayList<NodoD>();
 	private Game juego;		
-	private int L;
+	public int L;
 	public String localImagen;
 	public boolean comida=false;
 	public int comidaX=31;
@@ -116,8 +116,9 @@ public class Laberinto extends JPanel {
 		for(int i=0;i<juego.enemigos.size();i++)
 			if(juego.enemigos.get(i)!=null)juego.enemigos.get(i).paint(g2d);
 		if(comida==true){
-			g2d.setColor(Color.BLUE);
-			g2d.fillOval(comidaX*L -20/2, comidaY*L-20/2, 20, 20);
+			/*g2d.setColor(Color.BLUE);
+			g2d.fillOval(comidaX*L -20/2, comidaY*L-20/2, 20, 20);*/
+                        juego.jugador.comida(g2d);
 		}
 	}
 	
