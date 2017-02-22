@@ -206,25 +206,12 @@ public class Game extends JPanel{
 	}
         public void audio(String dir){
          try {
-            
-            // Se obtiene un Clip de sonido
-            //
             Clip sonido = AudioSystem.getClip();
             InputStream path=getClass().getResourceAsStream(dir);
             InputStream bufferedIn = new BufferedInputStream(path);
             AudioInputStream audioStream = AudioSystem.getAudioInputStream(bufferedIn);
-            //InputStream path=getClass().getResourceAsStream("/Sonidos/reloj1.wav");
-            // Se carga con un fichero wav
             sonido.open(audioStream);
-            
-            // Comienza la reproducción
             sonido.start();
-            
-            // Espera mientras se esté reproduciendo.
-           
-             /*System.out.println("fin");
-            // Se cierra el clip.
-            //sonido.close();*/
         } catch (Exception e) {
             System.out.println("" + e);
         }

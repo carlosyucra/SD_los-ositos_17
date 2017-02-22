@@ -93,45 +93,48 @@ public class Opciones extends JPanel implements Runnable{
 			}});
 		add(salir);
 	}
-	public void marcador(){
-		marcadorF = new Font("Arial",Font.BOLD,20);
-		marcador=new JPanel();
-		marcador.setPreferredSize(new Dimension(200,50));
-		marcadorL=new JLabel("Tiempo: "+tiempoBola);
-		marcadorL.setFont(marcadorF);
-		marcadorL.setForeground(Color.DARK_GRAY);
-		marcador.setBackground(Color.GRAY);
-		marcador.add(marcadorL);
-		add(marcador);
-	}
-	public void imagen() {
-		imagen=new JPanel();
-		imagenL=new JLabel();
-		imagenL.setSize(200, 220);
-		ImageIcon imgIcon = new ImageIcon(getClass().getResource("/Imagenes/jugador.png"));
+    public void marcador() {
+        marcadorF = new Font("Arial", Font.BOLD, 20);
+        marcador = new JPanel();
+        marcador.setPreferredSize(new Dimension(200, 50));
+        marcadorL = new JLabel("Tiempo: " + tiempoBola);
+        marcadorL.setFont(marcadorF);
+        marcadorL.setForeground(Color.DARK_GRAY);
+        marcador.setBackground(Color.GRAY);
+        marcador.add(marcadorL);
+        add(marcador);
+    }
+
+    public void imagen() {
+        imagen = new JPanel();
+        imagenL = new JLabel();
+        imagenL.setSize(200, 220);
+        ImageIcon imgIcon = new ImageIcon(getClass().getResource("/Imagenes/" + jugador.personajeNombre));
         Image imgEscalada = imgIcon.getImage().getScaledInstance(imagenL.getWidth(),
                 imagenL.getHeight(), Image.SCALE_SMOOTH);
         Icon iconoEscalado = new ImageIcon(imgEscalada);
         imagenL.setIcon(iconoEscalado);
         imagen.add(imagenL);
-		
-		//imagen.add(imagenL);
-		add(imagen);
-	}
-	public void caraEnojado(){
-		ImageIcon imgIcon = new ImageIcon(getClass().getResource("/Imagenes/jugadorEnojado.png"));
+
+        //imagen.add(imagenL);
+        add(imagen);
+    }
+
+    public void caraEnojado() {
+        ImageIcon imgIcon = new ImageIcon(getClass().getResource("/Imagenes/" + jugador.personajeNombre));
         Image imgEscalada = imgIcon.getImage().getScaledInstance(imagenL.getWidth(),
                 imagenL.getHeight(), Image.SCALE_SMOOTH);
         Icon iconoEscalado = new ImageIcon(imgEscalada);
         imagenL.setIcon(iconoEscalado);
-	}
-	public void caraNormal(){
-		ImageIcon imgIcon = new ImageIcon(getClass().getResource("/Imagenes/jugador.png"));
+    }
+
+    public void caraNormal() {
+        ImageIcon imgIcon = new ImageIcon(getClass().getResource("/Imagenes/" + jugador.personajeNombre));
         Image imgEscalada = imgIcon.getImage().getScaledInstance(imagenL.getWidth(),
                 imagenL.getHeight(), Image.SCALE_SMOOTH);
         Icon iconoEscalado = new ImageIcon(imgEscalada);
         imagenL.setIcon(iconoEscalado);
-	}
+    }
 //	public void paint(Graphics g){
 //		g.setColor(Color.GRAY);
 //		g.fillRect(800,0,200,600);
@@ -201,24 +204,12 @@ public class Opciones extends JPanel implements Runnable{
     }
     public void audio(String dir) {
         try {
-
-            // Se obtiene un Clip de sonido
-            //
             Clip sonido = AudioSystem.getClip();
             InputStream path = getClass().getResourceAsStream(dir);
             InputStream bufferedIn = new BufferedInputStream(path);
             AudioInputStream audioStream = AudioSystem.getAudioInputStream(bufferedIn);
-            //InputStream path=getClass().getResourceAsStream("/Sonidos/reloj1.wav");
-            // Se carga con un fichero wav
             sonido.open(audioStream);
-
-            // Comienza la reproducción
             sonido.start();
-
-            // Espera mientras se esté reproduciendo.
-            /*System.out.println("fin");
-            // Se cierra el clip.
-            //sonido.close();*/
         } catch (Exception e) {
             System.out.println("" + e);
         }

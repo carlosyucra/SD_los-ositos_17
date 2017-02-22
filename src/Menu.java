@@ -135,20 +135,14 @@ public class Menu extends javax.swing.JFrame {
     }
     public void audio(){
          try {
-            
-            // Se obtiene un Clip de sonido
-            //
             sonido = AudioSystem.getClip();
             InputStream path=getClass().getResourceAsStream("/Audios/bienvenida.wav");
             InputStream bufferedIn = new BufferedInputStream(path);
             AudioInputStream audioStream = AudioSystem.getAudioInputStream(bufferedIn);
-            //InputStream path=getClass().getResourceAsStream("/Sonidos/reloj1.wav");
-            // Se carga con un fichero wav
             sonido.open(audioStream);
             sonido.start();
             
-            // Espera mientras se esté reproduciendo.
-            //while (sonido.isOpen())
+            //Espera a que termine el primer audio
             Thread.sleep(9000);
             sonido.close();
             
@@ -157,11 +151,8 @@ public class Menu extends javax.swing.JFrame {
             audioStream = AudioSystem.getAudioInputStream(bufferedIn);
             sonido.open(audioStream);
             sonido.start();
-             /*System.out.println("fin");
-            // Se cierra el clip.
-            //sonido.close();*/
         } catch (Exception e) {
-             JOptionPane.showMessageDialog(null, e);
+            JOptionPane.showMessageDialog(null, e);
             System.out.println("" + e);
         }
         

@@ -100,25 +100,12 @@ public class Personajes extends javax.swing.JFrame {
     }//GEN-LAST:event_jLabel1MouseClicked
     public void audio(){
          try {
-            
-            // Se obtiene un Clip de sonido
-            //
             sonido = AudioSystem.getClip();
             InputStream path=getClass().getResourceAsStream("/Audios/personaje.wav");
             InputStream bufferedIn = new BufferedInputStream(path);
             AudioInputStream audioStream = AudioSystem.getAudioInputStream(bufferedIn);
-            //InputStream path=getClass().getResourceAsStream("/Sonidos/reloj1.wav");
-            // Se carga con un fichero wav
             sonido.open(audioStream);
-            
-            // Comienza la reproducción
             sonido.start();
-            
-            // Espera mientras se esté reproduciendo.
-           
-             /*System.out.println("fin");
-            // Se cierra el clip.
-            //sonido.close();*/
         } catch (Exception e) {
             System.out.println("" + e);
         }
