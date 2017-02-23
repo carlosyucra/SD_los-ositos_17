@@ -136,7 +136,7 @@ public class Menu extends javax.swing.JFrame {
     public void audio(){
          try {
             sonido = AudioSystem.getClip();
-            InputStream path=getClass().getResourceAsStream("/Audios/bienvenida.wav");
+            InputStream path=getClass().getResourceAsStream("/Audios/bienvenidaPao.wav");
             InputStream bufferedIn = new BufferedInputStream(path);
             AudioInputStream audioStream = AudioSystem.getAudioInputStream(bufferedIn);
             sonido.open(audioStream);
@@ -146,7 +146,7 @@ public class Menu extends javax.swing.JFrame {
             Thread.sleep(9000);
             sonido.close();
             
-            path=getClass().getResourceAsStream("/Audios/enter.wav");
+            path=getClass().getResourceAsStream("/Audios/enterPao.wav");
             bufferedIn = new BufferedInputStream(path);
             audioStream = AudioSystem.getAudioInputStream(bufferedIn);
             sonido.open(audioStream);

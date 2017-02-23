@@ -73,6 +73,4 @@ public class PuntoD {
 		
 		return retorna;
 	}
-
-
 }
