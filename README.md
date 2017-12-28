@@ -4,7 +4,7 @@ Autores:
 - Gleny Paola Gamarra Ramos
 - Maria Elisabeth Farfán Choquehuanca
 - Carlos Alberto Yucra Condori
-- Antoni Joau Benevente Mayta
+- Antoni Joao Benevente Mayta
 
 Requisitos:
 Java 8 de Oracle
